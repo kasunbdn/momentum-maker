@@ -35,13 +35,13 @@ public isolated client class Client {
     }
 
     public isolated function startUserActivity(int id) returns int?|error? {
-        sql:ParameterizedQuery query = `UPDATE UserActivity SET status = 1, startedDate = '${time:utcToString(time:utcNow())}' WHERE userActivityId = ${id}`;
+        sql:ParameterizedQuery query = `UPDATE UserActivity SET status = 1, startedDate = ${time:utcToString(time:utcNow())} WHERE userActivityId = ${id}`;
         sql:ExecutionResult result = check self.dbClient->execute(query);
         return result.affectedRowCount;
     }
 
     public isolated function completeUserActivity(int id) returns int?|error? {
-        sql:ParameterizedQuery query = `UPDATE UserActivity SET status = 2, completedDate = '${time:utcToString(time:utcNow())}' WHERE userActivityId = ${id}`;
+        sql:ParameterizedQuery query = `UPDATE UserActivity SET status = 2, completedDate = ${time:utcToString(time:utcNow())} WHERE userActivityId = ${id}`;
         sql:ExecutionResult result = check self.dbClient->execute(query);
         return result.affectedRowCount;
     }
