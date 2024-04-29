@@ -16,7 +16,7 @@ service / on new http:Listener(9090) {
 
     # A resource for getting activity list of a user
     # + return - Activity List
-    resource function get userActivity(string username) returns domain:UserActivity[]|error {
+    resource function get userActivity(string username) returns domain:ViewActivity[]|error {
         return check dbClient.queryActivitiesByUser(username) ?: [];
     }
 
@@ -35,13 +35,13 @@ service / on new http:Listener(9090) {
     # A resource to start an activity
     # + return - success or failure
     resource function put startActivity/[int id]() returns int|error {
-        return check dbClient.startUserActivity({id: id, status: 1}) ?: 0;
+        return check dbClient.startUserActivity(id) ?: 0;
     }
 
     # A resource to complete an activity
     # + return - success or failure
     resource function put completeActivity/[int id]() returns int|error {
-        return check dbClient.completeUserActivity({id: id, status: 1}) ?: 0;
+        return check dbClient.completeUserActivity(id) ?: 0;
     }
 }
 
