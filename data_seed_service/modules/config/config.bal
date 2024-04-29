@@ -1,6 +1,7 @@
 import ballerina/os;
 
-public configurable string FILE_NAME = getFromEnvVariable("FILE_NAME","activities_24_42_9");
+public configurable string FILE_HOST = getFromEnvVariable("FILE_HOST");
+public configurable string FILE_PATH = getFromEnvVariable("FILE_PATH");
 public configurable string DB_HOST = getFromEnvVariable("DB_HOST");
 public configurable string DB_NAME = getFromEnvVariable("DB_NAME");
 public configurable string DB_USERNAME = getFromEnvVariable("DB_USERNAME");

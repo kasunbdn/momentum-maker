@@ -2,7 +2,9 @@ import data_seed_service.config;
 import data_seed_service.db_client;
 import data_seed_service.domain;
 
+import ballerina/http;
 import ballerina/io;
+import ballerina/regex;
 
 public type ActivityJson record {
     string activity;
@@ -12,10 +14,13 @@ public type ActivityJson record {
 };
 
 public function main() returns error? {
-    string filePath = "./files/" + config:FILE_NAME;
     final db_client:Client dbClient = check new ();
 
-    string[] readLines = check io:fileReadLines(filePath);
+    http:Client dataClient = check new (config:FILE_HOST);
+
+    http:Response rsp = check dataClient->get(config:FILE_PATH);
+
+    string[] readLines = regex:split(check rsp.getTextPayload(), "(\r\n|\r|\n)");
     int recordCount = readLines.length();
 
     io:println("No. of records to be inserted: " + recordCount.toString());
