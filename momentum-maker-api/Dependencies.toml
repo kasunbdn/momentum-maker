@@ -367,7 +367,6 @@ modules = [
 	{org = "kasun", packageName = "momentum_maker_api", moduleName = "momentum_maker_api"},
 	{org = "kasun", packageName = "momentum_maker_api", moduleName = "momentum_maker_api.config"},
 	{org = "kasun", packageName = "momentum_maker_api", moduleName = "momentum_maker_api.db_client"},
-	{org = "kasun", packageName = "momentum_maker_api", moduleName = "momentum_maker_api.domain"},
-	{org = "kasun", packageName = "momentum_maker_api", moduleName = "momentum_maker_api.util"}
+	{org = "kasun", packageName = "momentum_maker_api", moduleName = "momentum_maker_api.domain"}
 ]
 

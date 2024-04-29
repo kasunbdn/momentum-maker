@@ -10,7 +10,7 @@ CREATE TABLE UserActivity (
 
 CREATE TABLE Activity (
     activityId  SERIAL PRIMARY KEY,
-    key VARCHAR(255),
+    key VARCHAR(255) UNIQUE,
     activity VARCHAR(1024),
     url VARCHAR(1024),
     activityType VARCHAR(25),
