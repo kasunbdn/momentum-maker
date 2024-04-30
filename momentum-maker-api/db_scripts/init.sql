@@ -17,3 +17,23 @@ CREATE TABLE Activity (
     createdDate VARCHAR(100),
     updatedDate VARCHAR(100)
 );
+
+-- Index for 'userId' in 'UserActivity' table
+CREATE INDEX idx_useractivity_userid
+ON UserActivity (userId);
+
+-- Index for 'activityId' in 'UserActivity' table
+CREATE INDEX idx_useractivity_activityid
+ON UserActivity (activityId);
+
+-- Index for 'userActivityId' in 'UserActivity' table
+CREATE INDEX idx_useractivity_useractivityid
+ON UserActivity (userActivityId);
+
+-- Index for 'activityId' in 'Activity' table
+CREATE INDEX idx_activity_activityid
+ON Activity (activityId);
+
+-- Index for 'activityType' in 'Activity' table
+CREATE INDEX idx_activity_activitytype
+ON Activity (activityType);

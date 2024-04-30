@@ -10,8 +10,8 @@ service / on new http:Listener(9090) {
     # A resource for getting a random activity by the activity type
     # + activityType - the activity type
     # + return - Activity
-    resource function get activity(domain:ActivityType activityType) returns domain:Activity|error {
-        return check dbClient.getActivityByType(activityType) ?: {};
+    resource function get activity(string username, domain:ActivityType? activityType = null) returns domain:Activity|error {
+        return check dbClient.getActivityByType(username, activityType) ?: {};
     }
 
     # A resource for getting activity list of a user

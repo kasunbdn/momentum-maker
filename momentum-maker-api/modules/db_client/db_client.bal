@@ -46,8 +46,18 @@ public isolated client class Client {
         return result.affectedRowCount;
     }
 
-    public isolated function getActivityByType(domain:ActivityType activityType) returns domain:Activity|error? {
-        sql:ParameterizedQuery query = `SELECT TOP 1 activityId, activity, url, activityType FROM Activity WHERE activityType = ${activityType} ORDER BY RANDOM()`;
+    public isolated function getActivityByType(string username, domain:ActivityType? activityType = null) returns domain:Activity|error? {
+        sql:ParameterizedQuery query = activityType is null ? `
+            SELECT TOP 1 a.activityId, a.activity, a.url, a.activityType 
+            FROM Activity a
+            LEFT JOIN UserActivity ua ON a.activityId = ua.activityId AND ua.userId = ${username}
+            WHERE ua.activityId IS NULL
+            ORDER BY RANDOM()`:
+            `SELECT TOP 1 a.activityId, a.activity, a.url, a.activityType 
+            FROM Activity a
+            LEFT JOIN UserActivity ua ON a.activityId = ua.activityId AND ua.userId = ${username}
+            WHERE a.activityType = ${activityType} AND ua.activityId IS NULL
+            ORDER BY RANDOM()`;
         return self.dbClient->queryRow(query);
     }
 }
