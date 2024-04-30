@@ -111,7 +111,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme} >
       <CssBaseline />
-      <Box sx={{ height: '100vh', overflowY: 'scroll' }}>
+      <Box >
         <Box>
           <CssBaseline />
           <AppBar component="nav">

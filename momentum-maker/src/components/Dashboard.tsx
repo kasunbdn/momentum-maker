@@ -42,11 +42,14 @@ const Dashboard = () => {
                     <Card sx={{ minWidth: 275 }}>
                         <CardContent>
                             <Typography sx={{ fontSize: 20 }} color="text.primary" gutterBottom>
-                                Hey there, {user?.displayName}! Ready to keep the momentum going?
+                                Hey there, {user?.displayName}!
                             </Typography>
-                            <Typography variant="h5" component="div">
+                            <Typography sx={{ fontSize: 18 }} color="text.primary" gutterBottom>
+                                Ready to keep the momentum going?
                             </Typography>
-                            <Typography sx={{ mb: 1.5,  fontSize: 16 }} color="text.secondary">
+                            
+                        
+                            <Typography sx={{ mb: '1.5rem', mt: '2rem',  fontSize: 16 }} color="text.secondary">
                                 Explore a new activity below and stay on track!
                             </Typography>
                             <Typography sx={{ fontSize: 24 }} variant="body2">
@@ -62,7 +65,7 @@ const Dashboard = () => {
                                     </Link> : <></>
                             }
                             <Button variant="text" onClick={addToUser}>Add to the List</Button>
-                            <Button variant="text" onClick={getNewActivity}>See another activity</Button>
+                            <Button variant="text" onClick={getNewActivity}>Maybe a different one?</Button>
                         </CardContent>
                     </Card>
                 </Grid>

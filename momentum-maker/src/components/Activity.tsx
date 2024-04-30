@@ -1,6 +1,7 @@
 import Button from '@mui/material/Button';
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import { completeActivity, startActivity } from '../api/activiy';
 
 
@@ -10,40 +11,45 @@ interface ActivityProps {
     activity: string,
     status: number,
     url: string,
-    type: string
+    type: string,
+    onActivityChanged?: () => void
 }
 
 const Activity = (props: ActivityProps) => {
     const handleStartActivity = () => {
-        startActivity(props.id);
+        startActivity(props.id).then(() => props.onActivityChanged && props.onActivityChanged());
     }
 
     const handleCompleteActivity = () => {
-        completeActivity(props.id);
+        completeActivity(props.id).then(() => props.onActivityChanged && props.onActivityChanged());
     }
 
     return (
         <ListItem key={props.id} secondaryAction={
             props.status == 0 ?
-                <Button type="submit" variant="contained" color="secondary" onClick={handleStartActivity}>
+                <Button sx={{ minWidth: '120px' }} type="submit" variant="contained" color="secondary" onClick={handleStartActivity}>
                     Start
                 </Button>
-                :
-                <Button type="submit" variant="contained" color="secondary"  onClick={handleCompleteActivity}>
-                    Complete
-                </Button>
+                : props.status == 1 ?
+                    <Button sx={{ minWidth: '120px' }} type="submit" variant="contained" color="secondary" onClick={handleCompleteActivity}>
+                        Complete
+                    </Button>
+                    : <></>
         }
             disablePadding={true}>
 
             <ListItemButton>
                 <ListItemIcon>
-                    <AssignmentIcon />
+                    {
+                        props.status == 0 || props.status == 1 ?
+                            <AssignmentIcon /> : <AssignmentTurnedInIcon />
+                    }
                 </ListItemIcon>
                 <ListItemText
                     primary={
                         props.activity
                     }
-                    secondary = {props.type}
+                    secondary={props.type}
                 />
             </ListItemButton>
 
