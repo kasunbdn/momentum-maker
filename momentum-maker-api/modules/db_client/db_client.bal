@@ -48,16 +48,16 @@ public isolated client class Client {
 
     public isolated function getActivityByType(string username, domain:ActivityType? activityType = null) returns domain:Activity|error? {
         sql:ParameterizedQuery query = activityType is null ? `
-            SELECT TOP 1 a.activityId, a.activity, a.url, a.activityType 
+            SELECT a.activityId, a.activity, a.url, a.activityType 
             FROM Activity a
             LEFT JOIN UserActivity ua ON a.activityId = ua.activityId AND ua.userId = ${username}
             WHERE ua.activityId IS NULL
-            ORDER BY RANDOM()`:
-            `SELECT TOP 1 a.activityId, a.activity, a.url, a.activityType 
+            ORDER BY RANDOM() fetch first 1 rows only`:
+            `SELECT a.activityId, a.activity, a.url, a.activityType 
             FROM Activity a
             LEFT JOIN UserActivity ua ON a.activityId = ua.activityId AND ua.userId = ${username}
             WHERE a.activityType = ${activityType} AND ua.activityId IS NULL
-            ORDER BY RANDOM()`;
+            ORDER BY RANDOM() fetch first 1 rows only`;
         return self.dbClient->queryRow(query);
     }
 }
