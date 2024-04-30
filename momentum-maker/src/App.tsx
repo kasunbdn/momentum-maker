@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
-import { Avatar, Grid, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Tooltip } from '@mui/material';
+import { Avatar, Card, Grid, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Tooltip } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Dashboard from './components/Dashboard';
 import axios from 'axios';
@@ -100,9 +100,13 @@ export default function App() {
 
   if (isAuthLoading || !signedIn) {
     return (
-      <Grid container sx={{justifyContent:'center'}}>
+      <Grid container sx={{ justifyContent: 'center' }}>
         <Box sx={{ display: 'flex' }}>
-          <CircularProgress />
+          <Card sx={{ mt: '8rem' }}>
+            <Box sx={{ py: '5rem', px:'8rem' }}>
+              <CircularProgress />
+            </Box>
+          </Card>
         </Box>
       </Grid>)
   }
@@ -158,7 +162,7 @@ export default function App() {
           </AppBar>
           <Container maxWidth="lg">
             <Box sx={{ pt: '5rem' }} >
-            <Dashboard></Dashboard>
+              <Dashboard></Dashboard>
             </Box>
           </Container>
         </Box>

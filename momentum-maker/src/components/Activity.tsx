@@ -3,7 +3,8 @@ import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/mater
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import { completeActivity, startActivity } from '../api/activiy';
-
+import DoneIcon from '@mui/icons-material/Done';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 
 
 interface ActivityProps {
@@ -27,11 +28,11 @@ const Activity = (props: ActivityProps) => {
     return (
         <ListItem key={props.id} secondaryAction={
             props.status == 0 ?
-                <Button sx={{ minWidth: '120px' }} type="submit" variant="contained" color="secondary" onClick={handleStartActivity}>
+                <Button sx={{ minWidth: '140px' }} variant="contained" color="secondary" onClick={handleStartActivity} startIcon={<DirectionsRunIcon />}>
                     Start
                 </Button>
                 : props.status == 1 ?
-                    <Button sx={{ minWidth: '120px' }} type="submit" variant="contained" color="secondary" onClick={handleCompleteActivity}>
+                    <Button sx={{ minWidth: '140px' }} variant="contained" color="secondary" onClick={handleCompleteActivity} startIcon={<DoneIcon />}>
                         Complete
                     </Button>
                     : <></>
