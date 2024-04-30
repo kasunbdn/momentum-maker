@@ -1,8 +1,8 @@
 import axios from "axios";
 
   
-const getRandomActivity = async (activityType: string) => {
-    const rsp = await axios.get(`activity?activityType=${activityType}`);
+const getRandomActivity = async (username: string) => {
+    const rsp = await axios.get(`activity?username=${username}`);
     return rsp;
   }
 
